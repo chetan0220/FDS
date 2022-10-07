@@ -6,7 +6,7 @@ int main()
 	printf("Input the matrix : ");
 	for (i = 0; i < 3; i++)
 	{
-		for (j = 0; j < m; j++)
+		for (j = 0; j < 3; j++)
 		{
 			scanf("%d", &matrix[i][j]);
 		}
@@ -25,7 +25,7 @@ int main()
 				}
      j = s[0][1];
      max = matrix[0][j];
-	for (k = 0; k < m; k++)
+	for (k = 0; k < 3; k++)
 	{
 		if (max <= matrix[k][j])
 			{
@@ -38,7 +38,7 @@ int main()
     {
 		if (s[0][0] == s[1][0] && s[0][1] == s[1][1])
 		{
-			printf("Saddle point (%d, %d) : %d",s[0][0], s[0][1], max);
+			printf("Saddle point (%d, %d) : %d\n",s[0][0], s[0][1], max);
 		}
 	}
 }
