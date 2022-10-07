@@ -1,10 +1,9 @@
-
 #include <stdio.h>
 int main()
 {
 	int i, j, k, m, n, min, max,s[2][2];
 	int matrix[3][3];
-	printf("Input the matrix : “);
+	printf("Input the matrix : ");
 	for (i = 0; i < 3; i++)
 	{
 		for (j = 0; j < m; j++)
@@ -12,8 +11,6 @@ int main()
 			scanf("%d", &matrix[i][j]);
 		}
 	}
-
-
 	for (i = 0; i < 3; i++)
 		{
 			min = matrix[i][0];
@@ -37,7 +34,6 @@ int main()
 				s[1][1] = j;
 			}
 	}
-
 	if (min == max) 
     {
 		if (s[0][0] == s[1][0] && s[0][1] == s[1][1])
