@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 int main()
@@ -6,6 +7,7 @@ int main()
     printf("For Addition type 1\n");
     printf("For Multiplication type 2\n");
     printf("For saddle point type 3\n");
+    printf("For saddle point using pointers type 4\n");
     printf("Enter your choice : ");
     scanf("%d", &operation);
 
@@ -159,6 +161,58 @@ int main()
               
               break;
             }
+          case 4:
+            {
+              int i, j, k, min, max, matrix[3][3], s[2][2] , *ptrToMatrix = &matrix[0][0];
+                printf("Enter matrix: \n");
+                for (i = 0; i < 3; i++) 
+                    {
+                        for (j = 0; j < 3; j++) 
+                            {
+                                scanf("%d", &matrix[i][j]);
+                            }
+                    }
+
+                for (i = 0; i < 3; i++) 
+                    {
+                        min = matrix[i][0];
+                        for (j = 0; j < 3; j++) 
+                            {
+                                if (min >= *( ptrToMatrix+(i*3) + j )) 
+                                    {
+                                        min = *( ptrToMatrix+(i*3) + j );
+                                        s[0][0] = i;
+                                        s[0][1] = j;
+                                    }
+                            }           
+
+                        j = s[0][1];
+                        max = matrix[0][j];
+                        for (k = 0; k < 3; k++) 
+                            {
+                                if (max <= *( ptrToMatrix+(k*3) + j)) 
+                                    {
+                                        max = *( ptrToMatrix+(i*3) + j );
+                                        s[1][0] = k;
+                                        s[1][1] = j;
+                                    }
+                            }
+
+                        if (min == max) 
+                            {
+                                if (s[0][0] == s[1][0] && s[0][1] == s[1][1]) 
+                                    {
+                                        printf("Saddle point (%d, %d) : %d\n", s[0][0], s[0][1], max);
+                                    }
+                            }
+                    }
+              
+
+
+
+              break;
+            }
         }
     return 0;
 }
+
