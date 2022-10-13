@@ -43,7 +43,7 @@ int main()
                         {
                             for(int j = 0; j  < 3 ; j++)
                                 {
-                                    sum[i][j] = *( ptrToArray1+(i*3) + j ) + *( ptrToArray1+(i*3) + j ) ;
+                                    sum[i][j] = *( ptrToArray1+(i*3) + j ) + *( ptrToArray2+(i*3) + j ) ;
                                 }
                         }
                     // displaying addition matrix
