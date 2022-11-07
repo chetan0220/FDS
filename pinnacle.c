@@ -20,22 +20,21 @@ void insertSecretary(struct node * head)
     new->prev = NULL;
     head->next = new;
     new->prev = head;
-   
 }
 void insertMember(struct node *head)
 {
     struct node *new;
     new=(struct node *)malloc(sizeof(struct node));
-    printf("enter member name:\n");
-    scanf(" %s",new->name);
-    printf("enter member's prn\n");
+    printf("enter member name: ");
+    scanf("%s",new->name);
+    printf("enter member's prn : ");
     scanf("%d",&new->prn);
-   
     new->next=NULL;
     new->prev=NULL;
     new->next=head->next;
-    head->next=head;
+    head->next=new;
     new->next->prev=new;
+    new->prev = head;
 }
 void display(struct node * head)
 {
@@ -49,20 +48,12 @@ void display(struct node * head)
         temp=temp->next;
     }
 }
-void deleteMember(struct node * head)
-{
-    
-    
-    
-    
-    
-}
 int main()
 {
     struct node * head ;
     head = (struct node *) malloc (sizeof(struct node));
     printf("enter president name : ");
-    scanf(" %s", head->name);
+    scanf("%s", head->name);
     printf("enter president prn : ");
     scanf("%d", &head->prn);
     head->next = NULL;
@@ -79,17 +70,14 @@ int main()
             case 1 :
             insertMember(head);
             break;
-            
             case 2 : 
             display(head);
             break;
-            
-            case 3 : 
-            deleteMember(head);
             default :
-            printf("enter valid choice ");
+            printf("Enter valid choice ");
         }
        
-    }while(ch<=2 && ch >=1);
+    }while(ch<=2 && ch>=1);
+    //display(head);
     return 0;
 }
