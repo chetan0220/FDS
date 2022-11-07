@@ -76,7 +76,6 @@ int main()
             default :
             printf("Enter valid choice ");
         }
-       
     }while(ch<=2 && ch>=1);
     //display(head);
     return 0;
