@@ -1,15 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 struct node
 {
     char name[10];
     int prn ;
     struct node * next,*prev ;
-};
-
-void insertSecretary(struct node * head)
+} *head;
+void display()
+{
+    struct node * temp ;
+    temp = head ;
+    while(temp!=NULL)
+    {
+        printf("%s : %d\n",temp->name ,temp->prn);
+        temp=temp->next;
+    }
+}
+void insertSecretary()
 {
     struct node *new ;
     new = (struct node *) malloc (sizeof(struct node));
@@ -19,11 +27,10 @@ void insertSecretary(struct node * head)
     scanf("%d", &new->prn);    
     new->next = NULL;
     new->prev = NULL;
-    head->next = new;
     new->prev = head;
+    head->next = new;
 }
-
-void insertMember(struct node *head)
+void insertMember()
 {
     struct node *new;
     new=(struct node *)malloc(sizeof(struct node));
@@ -38,8 +45,7 @@ void insertMember(struct node *head)
     new->next->prev=new;
     new->prev = head;
 }
-
-void deleteMember(struct node * head)
+void deleteMember()
 {
     int n;
     printf("enter prn of member to be deleted : ");
@@ -53,18 +59,17 @@ void deleteMember(struct node * head)
     temp->next->prev = temp->prev;
     temp->prev->next = temp->next;
     free(temp);
+    display();
 }
-
-void deletePresident(struct node * head)
+void deletePresident()
 {
     struct node * temp ;
     temp = head;
-    head = head->next;
-    head->prev = NULL;
-    free(temp);
+    free(head);
+    head = temp->next;
+    display();
 }
-
-void deleteSecretary(struct node * head)
+void deleteSecretary()
 {
     struct node * temp ;
     temp = head;
@@ -74,9 +79,9 @@ void deleteSecretary(struct node * head)
     }
     temp->prev->next = NULL;
     free(temp);
+    display();
 }
-
-void count(struct node * head)
+void count()
 {
     struct node * temp ;
     temp = head;
@@ -89,19 +94,7 @@ void count(struct node * head)
     printf("total members are : %d",counter);
 }
 
-void display(struct node * head)
-{
-    struct node * temp ;
-    temp = head ;
-    while(temp->next!=NULL)
-    {
-        printf("%s\t",temp->name);
-        printf(" %d\n",temp->prn);
-        temp=temp->next;
-    }
-}
-
-void reverse(struct node * head)
+void reverse()
 {
     struct node * ptr1 , *ptr2;
     ptr1 = head;
@@ -118,12 +111,9 @@ void reverse(struct node * head)
     head = ptr1;
     display(head);
 }
-
-
 int main()
 {
     //inserting president
-    struct node * head ;
     head = (struct node *) malloc (sizeof(struct node));
     printf("enter president name : ");
     scanf("%s", head->name);
@@ -133,8 +123,7 @@ int main()
     head->prev = NULL;
     
     //inserting secretary
-    insertSecretary(head);
-    
+    insertSecretary();
     int ch , y ;
     do
     {
@@ -144,38 +133,37 @@ int main()
         switch(ch)
         {
             case 1 :
-            insertMember(head);
+            insertMember();
             break;
 
             case 2 : 
-            deleteMember(head);
+            deleteMember();
             break;
 
             case 3:
-            deletePresident(head);
+            deletePresident();
             break;
 
             case 4:
-            deleteSecretary(head);
+            deleteSecretary();
             break;
 
             case 5:
-            count(head);
+            count();
             break;
 
             case 6:
             printf("reversed list : \n");
-            reverse(head);
+            reverse();
             break;
 
             case 7:
             printf("members : \n");
-            display(head);
+            display();
             break;
             
             case 0:
             return 0;
-
 
             default :
             printf("\nEnter valid choice ");
