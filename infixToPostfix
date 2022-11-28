@@ -1,0 +1,107 @@
+#include<stdio.h>
+#include<ctype.h>
+#include<stdlib.h>
+struct node 
+{
+    char data;
+    struct node *next;
+}*top=NULL;
+
+void push(char a)
+{
+    struct node * newnode ;
+    newnode = ( struct node *) malloc (sizeof(struct node));
+    newnode->data = a;
+    newnode->next = NULL;
+    if(top == NULL)
+    {
+        top = newnode ;
+    }
+    else
+    {
+        newnode->next = top ;
+        top = newnode;
+    }
+}
+char pop()
+{
+    char op;
+    struct node * temp;
+    if(top==NULL)
+    {
+        printf("stack empty\n");
+    }
+    else
+    {
+        temp = top ;
+        op = top->data;
+        top = top->next;
+        free(temp);
+    }
+    return op;
+}
+int precedence(char a)
+{
+    switch(a)
+    {
+        case '^' :
+            return 3;
+        break;
+        
+        case '*' :
+            return 2;
+        break;
+        
+        case '/' :
+            return 2;
+        break;
+        
+        case '+' :
+            return 1;
+        break;
+        
+        case '-' :
+            return 1;
+        break;
+    }
+}
+int main()
+{
+    char infix[20],postfix[20];
+    int i = 0 , j = 0 ;
+    printf("enter expression : ");
+    scanf(" %s",infix);
+    
+    while(infix[i] != '\0')
+    {
+        if(isalnum(infix[i]))
+        {
+            postfix[j++] = infix[i];
+        }
+        else
+        {
+            if(top==NULL)
+            {
+                push(infix[i]);
+            }
+            else
+            {
+                while(precedence(infix[i]) <= precedence(top->data) && top != NULL)
+                {
+                    postfix[j++] = pop();
+                }
+                push(infix[i]);
+            }
+        }
+        i++;
+    }
+    
+    while(top != NULL)
+    {
+        postfix[j++] = pop();
+        
+    }
+    postfix[j++] = '\0';
+    printf("%s",postfix);
+    return 0;
+}
