@@ -55,11 +55,11 @@ void print()
     }
     else
     {
-        if(front == rear)
+        if(front == rear)           //for one element
         {
             printf("%d ",queue[rear]);
         }
-        else if(front < rear)
+        else if(front < rear)           //when front is behid rear
         {
             for(int i = front; i <=rear ; i++ )
             {
@@ -68,7 +68,7 @@ void print()
         }
         else
         {
-            for(int i = front  ; i <= rear ; i = (i + 1)%size )
+            for(int i = front  ; i != rear+1 ; i = (i + 1)%size )
             {
                 printf("%d ",queue[i]);
             }
