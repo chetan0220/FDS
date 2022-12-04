@@ -1,7 +1,6 @@
 #include <stdio.h>
 #define size 4
 int queue[size] , front = -1 , rear = -1;
-
 void enqueue()
 {
     int data; 
@@ -22,9 +21,7 @@ void enqueue()
         rear = (rear + 1) % size;
     }
     queue[rear] = data;
-    
 }
-
 void dequeue()
 {
     int e;
@@ -101,9 +98,5 @@ int main()
                     printf("enetr valid choice : ");
         }
     }while(ch!=0);
-    
-    
-    
-    
     return 0;
 }
