@@ -67,7 +67,6 @@ int precedence(char a)
         break;
     }
 }
-
 void push1(int num)
 {
     top1++;
@@ -121,19 +120,10 @@ void evaluate(char postfix[])
                     push1(n3);
                     break;
             }
-            
         }
-        
         i++;
-        
-        
     }
-    
     printf("evaluation : %d",pop1());
-    
-    
-    
-    
 }
 int main()
 {
@@ -141,7 +131,6 @@ int main()
     int i = 0 , j = 0 ;
     printf("enter expression : ");
     scanf(" %s",infix);
-    
     while(infix[i] != '\0')
     {
         if(isalnum(infix[i]))
@@ -165,19 +154,12 @@ int main()
         }
         i++;
     }
-    
     while(top != NULL)
     {
         postfix[j++] = pop();
     }
     postfix[j] = '\0';
     printf("%s\n",postfix);
-    
     evaluate(postfix);
-    
-    
-    
     return 0;
 }
-
-
