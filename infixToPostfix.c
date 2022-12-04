@@ -149,10 +149,8 @@ int main()
                 push(infix[i]);
             }
         }
-
         i++;
     }
-
     while(top != NULL)
     {
         postfix[j++] = pop();
