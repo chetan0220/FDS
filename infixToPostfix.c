@@ -6,8 +6,8 @@ struct node
 {
     char data;
     struct node *next;
-}*top=NULL;
-
+};
+struct node * top=NULL;
 int s[20] , top1 = -1;
 void push(char a)
 {
@@ -127,33 +127,32 @@ void evaluate(char postfix[])
 }
 int main()
 {
-    char infix[20],postfix[20];
-    int i = 0 , j = 0 ;
+    char infix[20], postfix[20];
+    int i = 0, j = 0;
+
     printf("enter expression : ");
-    scanf(" %s",infix);
-    while(infix[i] != '\0')
+    scanf("%s",infix);
+
+    while(infix[i]!='\0')
     {
         if(isalnum(infix[i]))
-        {
             postfix[j++] = infix[i];
-        }
         else
         {
-            if(top==NULL)
-            {
+            if(top == NULL)
                 push(infix[i]);
-            }
+
             else
             {
-                while(precedence(infix[i]) <= precedence(top->data) && top != NULL)
-                {
-                    postfix[j++] = pop();
-                }
+             while( top != NULL && (precedence(top->data) >= precedence(infix[i])) ) 
+                postfix[j++]=pop();
                 push(infix[i]);
             }
         }
+
         i++;
     }
+
     while(top != NULL)
     {
         postfix[j++] = pop();
