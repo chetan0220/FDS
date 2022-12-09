@@ -5,14 +5,15 @@ struct node
     int data;
     struct node *left , *right;
 };
-void createNode(struct node *root , int key)
+struct node* createNode(struct node *root , int key)
 {
     root = (struct node*) malloc (sizeof(struct node));
     root->data = key;
     root->left = NULL;
     root->right = NULL;
+    return root;
 }
-void insert(struct node *root , int key)
+struct node* insert(struct node *root , int key)
 {
     if(root == NULL)                    // if tree is not created
     {
@@ -26,6 +27,7 @@ void insert(struct node *root , int key)
     {
         insert(root->right , key);
     }
+    return root;
 }
 void search(struct node *root ,int key)
 {
