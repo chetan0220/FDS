@@ -5,37 +5,65 @@ struct node
     int data;
     struct node *left , *right;
 };
-struct node* createNode(struct node *root , int key)
+struct node *createNode(int key)
 {
-    root = (struct node*) malloc (sizeof(struct node));
-    root->data = key;
-    root->left = NULL;
-    root->right = NULL;
-    return root;
+    struct node *temp ;
+    temp = (struct node*) malloc (sizeof(struct node));
+    temp->data = key;
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
 }
-struct node* insert(struct node *root , int key)
+struct node *insert(struct node *current , int key)
 {
-    if(root == NULL)                    // if tree is not created
+    if(current == NULL)                    // if tree is not created
     {
-        createNode(root,key);
+        return createNode(key);
     }
-    else if(key < root->data)             //if data is smaller insert on left side
+    if(key < current->data)             //if data is smaller insert on left side
     {
-        insert(root->left , key);
+        current->left = insert(current->left , key);
     }
     else                                 //if data is greater insert on right side
     {
-        insert(root->right , key);
+        current->right = insert(current->right , key);
     }
-    return root;
+    return current;
 }
 void search(struct node *root ,int key)
 {
     
 }
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+    }
+    printf("%d ",root->data);
+    inorder(root->right);
+}
+void preorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        printf("%d ",root->data);
+    }
+    preorder(root->left);
+    preorder(root->right);
+}
+void postorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        postorder(root->left);
+    }
+    postorder(root->right);
+    printf("%d ",root->data);
+}
 int main()
 {
-    struct node *root;
+    struct node *root = NULL;
     int key,ch;
     do
     {
@@ -46,7 +74,7 @@ int main()
             case 1:
                 printf("enter data : ");
                 scanf("%d",&key);
-                insert(root,key);
+                root = insert(root,key);
                 break;
             
             case 2 :
@@ -54,13 +82,17 @@ int main()
                 scanf("%d",&key);
                 search(root,key);
                 break;
-                
+            
+            case 3:
+                inorder(root);
+                break;
+
             case 0 :
                 return 0;
                 break;
             
             default : 
-                printf("enter valid choice ");
+                printf("enter valid choice\n");
         }
     }while(ch!=0);
     return 0;
