@@ -14,61 +14,77 @@ struct node *createNode(int key)
     temp->right = NULL;
     return temp;
 }
-struct node *insert(struct node *current , int key)
+struct node *insert(struct node *root , int key)
 {
-    if(current == NULL)                    // if tree is not created
+    if(root == NULL)                    // if tree is not created
     {
         return createNode(key);
     }
-    if(key < current->data)             //if data is smaller insert on left side
+    if(key < root->data)             //if data is smaller insert on left side
     {
-        current->left = insert(current->left , key);
+        root->left = insert(root->left , key);
     }
     else                                 //if data is greater insert on right side
     {
-        current->right = insert(current->right , key);
+        root->right = insert(root->right , key);
     }
-    return current;
+    return root;
 }
-void search(struct node *root ,int key)
+int search(struct node *root ,int key)
 {
-    
+    if(root == NULL)
+    {
+        return 0;
+    }
+    if(key < root->data)
+    {
+        search(root->left , key);
+    }
+    else
+    {
+        search(root->right , key);
+    }
+    return 1;
 }
 
 void inorder(struct node *root)
 {
-    if(root!=NULL)
+    if(root==NULL)
     {
-        inorder(root->left);
+        return;
     }
-    printf("%d ",root->data);
-    inorder(root->right);
+	inorder(root->left);
+	printf("%d ",root->data);
+	inorder(root->right);
 }
 void preorder(struct node *root)
 {
-    if(root!=NULL)
+    if(root==NULL)
     {
-        printf("%d ",root->data);
+        return;
     }
-    preorder(root->left);
-    preorder(root->right);
+	printf("%d ",root->data);
+	preorder(root->left);
+	preorder(root->right);
 }
 void postorder(struct node *root)
 {
-    if(root!=NULL)
+    if(root==NULL)
     {
-        postorder(root->left);
+        return;
     }
-    postorder(root->right);
-    printf("%d ",root->data);
+	postorder(root->left);
+	postorder(root->right);
+	printf("%d ",root->data);
 }
+
 int main()
 {
     struct node *root = NULL;
     int key,ch;
     do
     {
-        printf("1.insert\n2.search\n3.display inorder\n4.display preorder\n5.display postorder\n0.exit\nenter choice : ");
+        printf("\n1.insert\n2.search\n3.display inorder\n4.display preorder\n5.display postorder\n0.exit\nenter choice : ");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -81,11 +97,19 @@ int main()
             case 2 :
                 printf("enter data to be searched : ");
                 scanf("%d",&key);
-                search(root,key);
+                (search(root,key) == 1) ? printf("found\n") : printf("not found");
                 break;
             
             case 3:
                 inorder(root);
+                break;
+                
+            case 4:
+                preorder(root);
+                break;
+                
+            case 5:
+                postorder(root);
                 break;
 
             case 0 :
@@ -98,3 +122,4 @@ int main()
     }while(ch!=0);
     return 0;
 }
+
