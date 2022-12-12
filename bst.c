@@ -34,6 +34,7 @@ void search(struct node *root ,int key)
 {
     
 }
+
 void inorder(struct node *root)
 {
     if(root!=NULL)
