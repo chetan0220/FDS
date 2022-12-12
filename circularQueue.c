@@ -4,14 +4,14 @@ int queue[size] , front = -1 , rear = -1;
 void enqueue()
 {
     int data; 
-    printf("enter data : ");
-    scanf("%d",&data);
     if( (rear == size - 1 && front == 0) || (front == (rear+1)%size) )
     {
         printf("overflow\n");
         return;
     }
-    else if(rear==-1)
+    printf("enter data : ");
+    scanf("%d",&data);
+    if(rear==-1)
     {
         front = 0 ; 
         rear = 0 ;
@@ -46,30 +46,19 @@ void dequeue()
 }
 void print()
 {
+    int i = front;
     if(front == -1)
     {
         printf("empty queue\n");
     }
     else
-    {
-        if(front == rear)           //for one element
+    { 
+        while(i!=rear)
         {
-            printf("%d ",queue[rear]);
+            printf("%d ",queue[i]);
+            i = (i + 1) % size;
         }
-        else if(front < rear)           //when front is behid rear
-        {
-            for(int i = front; i <=rear ; i++ )
-            {
-                printf("%d ",queue[i]);
-            }
-        }
-        else
-        {
-            for(int i = front  ; i != rear+1 ; i = (i + 1)%size )
-            {
-                printf("%d ",queue[i]);
-            }
-        }
+        printf("%d ",queue[rear]);
     }
     printf("\n");
 }
@@ -79,7 +68,7 @@ int main()
     do
     {
         int ch;
-        printf("\n1.insert\n2.delete\n3.print\n0.exit\nenetr your choice : ");
+        printf("\n1.insert\n2.delete\n3.print\n0.exit\nenter your choice : ");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -95,7 +84,7 @@ int main()
             case 0 :
                     return 0 ;
             default :
-                    printf("enetr valid choice : ");
+                    printf("enetr valid choice");
         }
     }while(ch!=0);
     return 0;
