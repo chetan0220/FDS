@@ -46,7 +46,6 @@ int search(struct node *root ,int key)
     }
     return 1;
 }
-
 void inorder(struct node *root)
 {
     if(root==NULL)
@@ -77,14 +76,61 @@ void postorder(struct node *root)
 	postorder(root->right);
 	printf("%d ",root->data);
 }
-
+int inorderSuccessor(struct node *root)
+{
+    while(root != NULL && root->left != NULL)
+    {
+        root = root->left;
+    }
+    return root->data;
+}
+struct node *delete (struct node *root,int key)
+{
+    if(root == NULL)
+    {
+        return root;
+    }
+    if(key<root->data)
+    {
+        root->left = delete (root->left , key);
+    }
+    else if(key > root->data)
+    {
+        root->right = delete(root->right , key);
+    }
+    else 
+    {
+        if(root->left == NULL)
+        {
+            struct node *temp;
+            temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if(root->right == NULL)
+        {
+            struct node *temp;
+            temp = root->left;
+            free(root);
+            return temp;
+        }
+        else
+        {
+            struct node * temp;
+            temp = root->right;
+            root->data = inorderSuccessor(temp);
+            root->right = delete(root->right , root->data);
+        }
+    }
+    return root;
+}
 int main()
 {
     struct node *root = NULL;
     int key,ch;
     do
     {
-        printf("\n1.insert\n2.search\n3.display inorder\n4.display preorder\n5.display postorder\n0.exit\nenter choice : ");
+        printf("\n1.insert\n2.search\n3.display inorder\n4.display preorder\n5.display postorder\n6.delete\n0.exit\nenter choice : ");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -111,6 +157,13 @@ int main()
             case 5:
                 postorder(root);
                 break;
+                
+            case 6:
+                printf("enter data to be deleted : ");
+                scanf("%d",&key);
+                delete(root,key);
+                inorder(root);
+                break;
 
             case 0 :
                 return 0;
@@ -122,4 +175,3 @@ int main()
     }while(ch!=0);
     return 0;
 }
-
