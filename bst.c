@@ -86,6 +86,7 @@ int inorderSuccessor(struct node *root)
 }
 struct node *delete (struct node *root,int key)
 {
+	//searching the node
     if(root == NULL)
     {
         return root;
@@ -98,6 +99,7 @@ struct node *delete (struct node *root,int key)
     {
         root->right = delete(root->right , key);
     }
+	//deleting logic
     else 
     {
         if(root->left == NULL)
