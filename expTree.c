@@ -2,25 +2,25 @@
 #include<stdlib.h>
 #include<math.h>
 #include<ctype.h>
-struct tree
+struct node
 {
     char data;
-    struct tree *left, *right;
+    struct node *left, *right;
 };
 
 int top = -1;
-struct tree *stack[20];
-struct tree *root;
-void push(struct tree *root) 
+struct node *stack[20];
+struct node *root;
+void push(struct node *root) 
 {
     top = top + 1;
     stack[top] = root;
 } 
-struct tree *pop () 
+struct node *pop () 
 {
     return stack[top--];
 }
-void inorder(struct tree *root) 
+void inorder(struct node *root) 
 {
     if (root == NULL)
     {
@@ -34,14 +34,13 @@ void inorder(struct tree *root)
             printf ("%c", root->data);
             inorder (root->right);
         }
-    
     }
 }
 
 void operand (char b) 
 {
-    struct tree *root;
-    root = (struct tree *) malloc (sizeof (struct tree));
+    struct node *root;
+    root = (struct node *) malloc (sizeof (struct node));
     root->data = b;
     root->left = NULL;
     root->right = NULL;
@@ -49,8 +48,8 @@ push (root);
 } 
 void operators (char a)
 {
-    struct tree *root;
-    root = (struct tree *) malloc (sizeof (struct tree));
+    struct node *root;
+    root = (struct node *) malloc (sizeof (struct node));
     root->data = a;
     root->right = pop ();   
     root->left = pop ();
