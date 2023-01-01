@@ -44,7 +44,7 @@ void operand (char b)
     root->data = b;
     root->left = NULL;
     root->right = NULL;
-push (root);
+    push (root);
 } 
 void operators (char a)
 {
@@ -59,22 +59,22 @@ int main ()
 {
     int i = 0;
     char postfix[20];
-    printf ("\nEnter postfix expression:");
+    printf ("\nenter postfix expression : ");
     scanf ("%s", postfix);
     while (postfix[i] != '\0')
     {
-        if(isalnum (postfix[i]))
+        if(isalnum(postfix[i]))
     	{
-            printf ("\nOperand==>%c", postfix[i]);
+            //printf ("\nOperand==>%c", postfix[i]);
             operand (postfix[i]);
         }
         else
-	{
+	    {
             operators (postfix[i]);
         }
         i++;
     }
-    printf ("\nInorder traversal of the tree==>\n");
+    printf ("\ninfix expression : ");
     inorder (stack[top]);
     return 0;
 }
