@@ -65,7 +65,6 @@ int main ()
     {
         if(isalnum(postfix[i]))
     	{
-            //printf ("\nOperand==>%c", postfix[i]);
             operand (postfix[i]);
         }
         else
