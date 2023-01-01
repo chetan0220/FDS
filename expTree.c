@@ -70,7 +70,7 @@ int main ()
             operand (postfix[i]);
         }
         else
-	    {
+	{
             operators (postfix[i]);
         }
         i++;
