@@ -144,8 +144,10 @@ int main()
 
             else
             {
-             while( top != NULL && (precedence(top->data) >= precedence(infix[i])) ) 
-                postfix[j++]=pop();
+                while( top != NULL && (precedence(top->data) >= precedence(infix[i])) )
+                {
+                    postfix[j++]=pop();
+                }
                 push(infix[i]);
             }
         }
